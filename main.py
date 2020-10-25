@@ -13,8 +13,10 @@ def get_fact():
 
     soup = BeautifulSoup(response.content, "html.parser")
     facts = soup.find("div", id="content")
-
-    return facts.getText()
+    quote = facts.getText()
+    r = requests.post('https://hidden-journey-62459.herokuapp.com/piglatinize/',
+                      allow_redirects=False, data={'input_text': quote})
+    return r.headers['Location']
 
 
 @app.route('/')
