@@ -1,7 +1,7 @@
 import os
 
 import requests
-from flask import Flask, send_file, Response
+from flask import Flask, render_template
 from bs4 import BeautifulSoup
 
 app = Flask(__name__)
@@ -21,7 +21,7 @@ def get_fact():
 @app.route('/')
 def home():
     fact = get_fact()
-    return fact
+    return render_template('base.jinja2', fact=fact)
 
 
 if __name__ == "__main__":
