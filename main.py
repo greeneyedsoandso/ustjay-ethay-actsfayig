@@ -8,12 +8,11 @@ app = Flask(__name__)
 
 
 def get_fact():
-
     response = requests.get("http://unkno.com")
-
     soup = BeautifulSoup(response.content, "html.parser")
     facts = soup.find("div", id="content")
     quote = facts.getText()
+    quote = quote.replace(".", "")
     r = requests.post('https://hidden-journey-62459.herokuapp.com/piglatinize/',
                       allow_redirects=False, data={'input_text': quote})
     return r.headers['Location']
